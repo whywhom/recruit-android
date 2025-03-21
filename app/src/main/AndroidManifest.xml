@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
+        android:name=".TransactionApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -19,7 +20,7 @@
         tools:replace="android:appComponentFactory">
 
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".ui.MainActivity"
             tools:ignore="Instantiatable"
             android:exported="true">
             <intent-filter>

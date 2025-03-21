@@ -1,3 +1,25 @@
+## Technologies Used
+
+- Jetpack Compose
+- Hilt
+- Retrofit 2
+- Moshi
+- Coroutines
+- StateFlow
+- Material 3
+- Kotlin
+- ViewModel
+- 
+## Summary of Technology Stack:
+
+- UI: Jetpack Compose, Material 3
+- Dependency Injection: Hilt, Dagger
+- Network Requests: Retrofit 2, Moshi
+- Asynchronous Programming: Kotlin Coroutines
+- State Management: StateFlow, MutableStateFlow
+- Data Storage & Models: ViewModel
+
+> These technologies combine to create a modern, efficient workflow for Android development.
 
 # Android
 Create a simple application that will fetch a list of transactions from an api endpoint and display them in a list.  When a user selects a transaction they will be shown a second screen that will display a more detailed view of the transaction data. 
