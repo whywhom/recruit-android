@@ -6,6 +6,7 @@ import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import nz.co.test.transactions.ui.screen.TransactionsDetailScreen
 import nz.co.test.transactions.ui.screen.TransactionsScreen
 
 @Composable
@@ -19,9 +20,16 @@ fun TransactionApp(
         popExitTransition = { scaleOut(targetScale = 0.9f) },
         popEnterTransition = { EnterTransition.None }
     ) {
-        composable(Screen.TransactionList.route) {
+        composable(Screen.TransactionList.route) { backStackEntry->
             TransactionsScreen(
-                windowSizeClass = adaptiveInfo.windowSizeClass
+                navigateToPodcastDetails = { id ->
+                    appState.navigateToTransactionDetail(id, backStackEntry)
+                }
+            )
+        }
+        composable(Screen.TransactionDetail.route) {
+            TransactionsDetailScreen(
+                onBackPress = appState::navigateBack
             )
         }
     }

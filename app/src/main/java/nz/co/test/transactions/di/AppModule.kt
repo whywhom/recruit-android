@@ -12,6 +12,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
+import nz.co.test.transactions.data.TransactionRepository
 import nz.co.test.transactions.data.services.TransactionsService
 import nz.co.test.transactions.ui.MainActivity
 import okhttp3.OkHttpClient
@@ -53,6 +54,12 @@ object AppModule {
     @Singleton
     fun provideTransactionsApi(retrofit: Retrofit): TransactionsService =
         retrofit.create(TransactionsService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideTransactionRepository(api: TransactionsService): TransactionRepository {
+        return TransactionRepository(api)
+    }
 }
 
 @Module

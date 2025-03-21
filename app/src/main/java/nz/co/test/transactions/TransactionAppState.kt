@@ -12,7 +12,7 @@ import androidx.navigation.compose.rememberNavController
 sealed class Screen(val route: String) {
     data object TransactionList : Screen("transactionList")
     data object TransactionDetail : Screen("detail/{$transactionId}") {
-        fun createRoute(id: String) = "detail/$id"
+        fun createRoute(id: Int) = "detail/$id"
     }
     companion object {
         const val transactionId = "id"
@@ -32,7 +32,7 @@ class TransactionAppState(
     private val context: Context
 )
 {
-    fun navigateToTransactionDetail(id: String, from: NavBackStackEntry) {
+    fun navigateToTransactionDetail(id: Int, from: NavBackStackEntry) {
         // In order to discard duplicated navigation events, we check the Lifecycle
         if (from.lifecycleIsResumed()) {
             navController.navigate(Screen.TransactionDetail.createRoute(id))

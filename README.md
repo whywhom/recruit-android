@@ -9,7 +9,7 @@
 - Material 3
 - Kotlin
 - ViewModel
-- 
+
 ## Summary of Technology Stack:
 
 - UI: Jetpack Compose, Material 3
