@@ -24,7 +24,7 @@ class TransactionDetailViewModel @Inject constructor(
 ) : ViewModel() {
     private val transactionId: Int = savedStateHandle.get<String>(Screen.transactionId)?.toInt()?: -1
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-    private val _transactions = MutableStateFlow<Transaction?>(null)
+    private val _transactions = MutableStateFlow<List<Transaction>>(emptyList())
     val transactions = _transactions.asStateFlow()
 
     private val _errorMessage = MutableStateFlow<String?>(null) // Store error messages
@@ -42,7 +42,7 @@ class TransactionDetailViewModel @Inject constructor(
                 _transactions.value = withContext(ioDispatcher) {
                     val transactions = repository.fetchTransactions().sortedByDescending { it.id }
                     // Find the transaction with the given id
-                    transactions.find {
+                    transactions.filter {
                         it.id == transactionId
                     }
                 }

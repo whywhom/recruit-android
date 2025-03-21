@@ -15,6 +15,10 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
+enum class SortType {
+    ID, DATE, SUMMARY
+}
+
 @HiltViewModel
 class TransactionViewModel @Inject constructor(
     private val repository: TransactionRepository,
@@ -44,6 +48,20 @@ class TransactionViewModel @Inject constructor(
                 _errorMessage.value = "Server error: ${e.message}"
             } catch (e: Exception) {
                 _errorMessage.value = "An unexpected error occurred: ${e.localizedMessage}"
+            }
+        }
+    }
+
+    fun sortedList(type: SortType) {
+        viewModelScope.launch {
+            _transactions.value = withContext(ioDispatcher) {
+                repository.fetchTransactions().sortedWith { t1, t2 ->
+                    when (type) {
+                        SortType.ID -> t2.id.compareTo(t1.id)  // Compare Int (Comparable)
+                        SortType.DATE -> t2.transactionDate.compareTo(t1.transactionDate)  // Compare LocalDateTime (Comparable)
+                        SortType.SUMMARY -> t2.summary.compareTo(t1.summary)  // Compare String (Comparable)
+                    }
+                }
             }
         }
     }

@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Transactions</string>
+    <string name="back">Back</string>
+    <string name="error_default">Default</string>
+    <string name="data">Data:</string>
+    <string name="debit">Debit:</string>
+    <string name="sub_total">SUB TOTAL:</string>
+    <string name="gst">GST:</string>
+    <string name="credit">Credit:</string>
+    <string name="retry">Retry</string>
+    <string name="sort_by_id">Sort by ID</string>
+    <string name="sort_by_date">Sort by Date</string>
+    <string name="sort_by_summary">Sort by Summary</string>
 </resources>
