@@ -1,3 +1,8 @@
+
+<img src="screenshot/list.png" alt="Screenshot 0" height="200"> 
+<img src="screenshot/detail01.png" alt="Screenshot 1" height="200"> 
+<img src="screenshot/detail02.png" alt="Screenshot 2" height="200">
+
 ## Technologies Used
 
 - Jetpack Compose
@@ -20,6 +25,19 @@
 - Data Storage & Models: ViewModel
 
 > These technologies combine to create a modern, efficient workflow for Android development.
+
+## Build and Test
+
+```
+* build apk
+```
+script/build
+```
+* run unit tests
+```
+script/test
+```
+
 
 # Android
 Create a simple application that will fetch a list of transactions from an api endpoint and display them in a list.  When a user selects a transaction they will be shown a second screen that will display a more detailed view of the transaction data. 

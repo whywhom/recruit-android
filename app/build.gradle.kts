@@ -20,6 +20,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -40,15 +43,35 @@ android {
     }
 
     namespace = "nz.co.test.transactions"
+
+    testOptions.unitTests {
+        isIncludeAndroidResources = true
+
+        all { test ->
+            with(test) {
+                testLogging {
+                    events = setOf(
+                        org.gradle.api.tasks.testing.logging.TestLogEvent.PASSED,
+                        org.gradle.api.tasks.testing.logging.TestLogEvent.SKIPPED,
+                        org.gradle.api.tasks.testing.logging.TestLogEvent.FAILED,
+                        org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_OUT,
+                        org.gradle.api.tasks.testing.logging.TestLogEvent.STANDARD_ERROR,
+                    )
+                }
+            }
+        }
+    }
 }
 kotlin {
     jvmToolchain(17)
 }
 dependencies {
-    testImplementation(libs.junit.jupiter)
     val composeBom = platform(libs.androidx.compose.bom)
     implementation(composeBom)
     androidTestImplementation(composeBom)
+
+    val coroutinesBom = platform(libs.kotlin.coroutines.bom)
+    implementation(coroutinesBom)
 
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlinx.coroutines.android)
@@ -87,18 +110,20 @@ dependencies {
     implementation(libs.androidx.window)
     implementation(libs.androidx.window.core)
 
-    testImplementation(libs.junit)
-    testImplementation(libs.junit.jupiter)
+    // Test
+    testImplementation(libs.junit.jupiter.api) // Example for JUnit 5
+    testImplementation(libs.mockk) // For MockK
+    testImplementation(libs.turbine) // For Turbine
+    testImplementation(libs.mockito.core) // For Mockito
+    testImplementation(libs.androidx.junit) // For Android tests (if applicable)
+    // For instrumentation tests
+    androidTestImplementation(libs.hilt.android.testing)
+    kaptAndroidTest(libs.hilt.compiler)
+    testImplementation(libs.kotlinx.coroutines.test)
+    // For local unit tests
     testImplementation(libs.hilt.android.testing)
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.10.0")
-    testImplementation("org.junit.platform:junit-platform-runner:1.11.0")
-    testImplementation("org.mockito:mockito-core:5.12.0")
-    testImplementation("androidx.arch.core:core-testing:2.2.0")
-    // mockito-kotlin
-    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
-    // Mockk framework
-    testImplementation("io.mockk:mockk:1.13.10")
-    testImplementation("app.cash.turbine:turbine:1.2.0")
+    kaptTest(libs.hilt.compiler)
+    testImplementation(libs.jetbrains.kotlinx.coroutines.test)
 }
 
 // Allow references to generated code

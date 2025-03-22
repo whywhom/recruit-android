@@ -5,6 +5,7 @@ import com.squareup.moshi.FromJson
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.ToJson
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import dagger.Binds
 import dagger.MapKey
 import dagger.Module
 import dagger.Provides
@@ -12,6 +13,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
+import nz.co.test.transactions.data.DefaultRepository
 import nz.co.test.transactions.data.TransactionRepository
 import nz.co.test.transactions.data.services.TransactionsService
 import nz.co.test.transactions.ui.MainActivity
@@ -60,6 +62,15 @@ object AppModule {
     fun provideTransactionRepository(api: TransactionsService): TransactionRepository {
         return TransactionRepository(api)
     }
+}
+
+@Module
+@InstallIn(SingletonComponent::class)
+abstract class RepositoryModule {
+
+    @Singleton
+    @Binds
+    abstract fun bindTaskRepository(repository: TransactionRepository): DefaultRepository
 }
 
 @Module

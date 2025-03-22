@@ -1,34 +1,36 @@
 package nz.co.test.transactions.data
 
 import android.util.Log
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import nz.co.test.transactions.data.services.TransactionsService
 import nz.co.test.transactions.model.Transaction
 import javax.inject.Inject
 
 class TransactionRepository @Inject constructor(
     private val api: TransactionsService
-) {
+) : DefaultRepository {
     private var cachedTransactions: List<Transaction> = emptyList()
 
-    suspend fun getTransactions(): List<Transaction> {
+    override suspend fun getTransactions(): List<Transaction> = withContext(Dispatchers.IO) {
         try {
             if (cachedTransactions.isNotEmpty()) {
                 Log.d(TransactionRepository::class.java.simpleName, "Loaded transactions from in-memory cache")
-                return cachedTransactions
+                return@withContext cachedTransactions
             }
-            val transaction = api.retrieveTransactions()
-            cachedTransactions = transaction
-            Log.d(TransactionRepository::class.java.simpleName, "transaction.size = ${transaction.size}")
-            return transaction
+            val transactions = api.retrieveTransactions()
+            cachedTransactions = transactions
+            transactions
         } catch (e: Exception) {
-            Log.e(TransactionRepository::class.java.simpleName, "Error fetching transactions ${e.message}")
+            Log.e(TransactionRepository::class.java.simpleName, "Error fetching transactions: ${e.message}")
             throw Exception("Failed to fetch transactions: ${e.message}", e)
         }
     }
 
-    fun fetchTransactions(): List<Transaction> = cachedTransactions
+    override fun fetchTransactions(): List<Transaction> = cachedTransactions
+
     // Optionally, provide a method to clear the cache if needed
-    fun clearCache() {
+    override fun clearCache() {
         cachedTransactions = emptyList()
         Log.d(TransactionRepository::class.java.simpleName, "In-memory cache cleared")
     }
