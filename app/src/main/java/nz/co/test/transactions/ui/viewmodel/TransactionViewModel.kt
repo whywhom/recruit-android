@@ -1,6 +1,5 @@
 package nz.co.test.transactions.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -8,7 +7,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import nz.co.test.transactions.data.DefaultRepository
-import nz.co.test.transactions.data.TransactionRepository
 import nz.co.test.transactions.model.Transaction
 import retrofit2.HttpException
 import java.io.IOException

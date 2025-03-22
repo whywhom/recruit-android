@@ -12,6 +12,34 @@ script/build
 script/test
 ```
 
+```shell
+
+> Task :app:testDebugUnitTest
+TransactionViewModelTest > fetchTransactions should update transactions state flow on success PASSED
+TransactionViewModelTest > sortedList should sort transactions by ID PASSED
+TransactionViewModelTest > fetchTransactions should update errorMessage on IOException PASSED
+TransactionDetailViewModelTest > fetchTransactions should filter transactions by transactionId PASSED
+TransactionDetailViewModelTest > fetchTransactions should update errorMessage on unexpected exception PASSED
+TransactionDetailViewModelTest > fetchTransactions should clear errorMessage on success PASSED
+TransactionDetailViewModelTest > getTransactionId should return correct transactionId PASSED
+TransactionDetailViewModelTest > fetchTransactions should update errorMessage on HttpException PASSED
+TransactionDetailViewModelTest > fetchTransactions should update transactions state flow on success PASSED
+TransactionDetailViewModelTest > fetchTransactions should update errorMessage on IOException PASSED
+OpenJDK 64-Bit Server VM warning: Sharing is only supported for boot loader classes because bootstrap classpath has been appended
+
+> Task :app:testReleaseUnitTest
+TransactionViewModelTest > fetchTransactions should update transactions state flow on success PASSED
+TransactionViewModelTest > sortedList should sort transactions by ID PASSED
+TransactionViewModelTest > fetchTransactions should update errorMessage on IOException PASSED
+TransactionDetailViewModelTest > fetchTransactions should filter transactions by transactionId PASSED
+TransactionDetailViewModelTest > fetchTransactions should update errorMessage on unexpected exception PASSED
+TransactionDetailViewModelTest > fetchTransactions should clear errorMessage on success PASSED
+TransactionDetailViewModelTest > getTransactionId should return correct transactionId PASSED
+TransactionDetailViewModelTest > fetchTransactions should update errorMessage on HttpException PASSED
+TransactionDetailViewModelTest > fetchTransactions should update transactions state flow on success PASSED
+TransactionDetailViewModelTest > fetchTransactions should update errorMessage on IOException PASSED
+
+```
 ## Technologies Used
 
 - Jetpack Compose
