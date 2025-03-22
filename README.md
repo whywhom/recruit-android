@@ -1,5 +1,5 @@
 
-<img src="screenshot/list.png" alt="Screenshot 0" height="300"> <img src="screenshot/detail01.png" alt="Screenshot 1" height="300"> <img src="screenshot/detail02.png" alt="Screenshot 2" height="300">
+<img src="screenshot/list.png" alt="Screenshot 0" height="400"> <img src="screenshot/detail01.png" alt="Screenshot 1" height="400"> <img src="screenshot/detail02.png" alt="Screenshot 2" height="400">
 
 ## Technologies Used
 
